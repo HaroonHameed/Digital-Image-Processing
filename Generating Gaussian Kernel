@@ -1,0 +1,45 @@
+import sys
+import math
+
+
+#try except for odd input
+try:
+
+    input_sigma = int(input('Enter the value of input_sigma: '))
+    rows = int(input('Enter number of rows: '))
+    cols = int(input('Enter number of columns: '))
+
+
+    if ( rows  %  2  ==  0  or   cols  %  2  ==  0):
+        raise Exception ('Matrix Size should be odd not even ')
+
+except Exception as e:
+
+    print('Error')
+    print(str(e))
+    sys.exit()
+
+#gaussain kernel
+matrix = [ [ 0  for  i  in  range (cols)
+           ]  for j in range(rows)]
+
+#calcluation of gaussain kernel
+for a  in  range ( - ( int ( rows  /  2 ) ) ,  int ( rows  /  2 )  +  1):
+    for b in range( - ( int ( cols  /  2) ) ,  int ( cols  /  2 )  +  1 ):
+
+        output = ( a * a ) + ( b  *  b )
+        output = output  /  ( 2  *  input_sigma  *  input_sigma)
+        output =  -output
+        output = math.e  **  output
+        output = output  /  ( 2  *  3.14  *  input_sigma  *  input_sigma )
+        # rounding upto 5 deciaml places
+        output = round( output , 5 )
+        matrix[a + int(rows / 2)][b + int(cols / 2)] = output
+
+print("Output Kernal \n")
+for x in range(rows):
+    for y in range(cols):
+        print( matrix[x][y], end=" ")
+
+    print("\n")
+
